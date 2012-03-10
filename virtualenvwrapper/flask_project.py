@@ -15,5 +15,15 @@ def template(args):
     """ Installs Flask
     """
     project = args[0]
-    subprocess.check_all(['pip', 'install', 'Flask'])
+    subprocess.check_call(['pip', 
+                           'install', 
+                           'Flask', 
+                           'Flask-login',
+                           'Flask-SQLAlchemy',
+                           'Flask-WTF'])
+    subprocess.check_call(['touch', 
+                           '%s.py' % project,
+                           'forms.py',
+                           'models.py'])
+    subprocess.check_call(['mkdir', 'templates', 'static'])
     return
