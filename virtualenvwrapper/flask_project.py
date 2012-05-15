@@ -20,10 +20,19 @@ def template(args):
                            'Flask', 
                            'Flask-login',
                            'Flask-SQLAlchemy',
-                           'Flask-WTF'])
+                           'Flask-WTF',
+                           'Flask-Script'])
+
+    # setup project directories
+    subprocess.check_call(['mkdir', '%s' % project])
+    subprocess.check_call(['mkdir', 
+                           '%s/templates' % project, 
+                           '%s/static' % project])
+    
+    # setup project files
     subprocess.check_call(['touch', 
-                           '%s.py' % project,
-                           'forms.py',
-                           'models.py'])
-    subprocess.check_call(['mkdir', 'templates', 'static'])
+                           '%s/__init__.py' % project,
+                           '%s/forms.py' % project,
+                           '%s/models.py' % project,
+                           'manage.py'])
     return
