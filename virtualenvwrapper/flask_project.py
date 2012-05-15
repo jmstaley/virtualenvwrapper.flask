@@ -8,6 +8,7 @@
 
 import logging
 import subprocess
+import os
 
 log = logging.getLogger('virtualenvwrapper.flask')
 
@@ -30,9 +31,18 @@ def template(args):
                            '%s/static' % project])
     
     # setup project files
+    data_files = '%s/data' % os.path.abspath(os.path.dirname(__file__))
+
+    manage_file = open('manage.py', 'w')
+
     subprocess.check_call(['touch', 
                            '%s/__init__.py' % project,
                            '%s/forms.py' % project,
-                           '%s/models.py' % project,
-                           'manage.py'])
+                           '%s/models.py' % project])
+    subprocess.check_call(['sed', 
+                           's/\[APPNAME\]/%s/' % project, 
+                           '%s/manage.py' % data_files],
+                           stdout=manage_file)
+    manage_file.close()
+
     return
