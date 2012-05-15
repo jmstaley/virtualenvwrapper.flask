@@ -1,1 +1,12 @@
-A simple virtualenvwrapper project template to install Flask, Flask-login, Flask-SQLAlchemy and Flask-WTF
+A simple virtualenvwrapper project template to install Flask, Flask-login, Flask-SQLAlchemy, Flask-WTF and Flask-Script and setup a simple project template.
+
+project/
+ |
+ |-> project/
+      |
+      |-> templates/
+      |-> static/
+      |-> __init__py
+      |-> forms.py
+      |-> models.py
+ |-> manage.py
