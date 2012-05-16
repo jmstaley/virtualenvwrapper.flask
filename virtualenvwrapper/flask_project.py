@@ -34,15 +34,24 @@ def template(args):
     data_files = '%s/data' % os.path.abspath(os.path.dirname(__file__))
 
     manage_file = open('manage.py', 'w')
+    init_file = open('%s/__init__.py' % project, 'w')
 
     subprocess.check_call(['touch', 
-                           '%s/__init__.py' % project,
                            '%s/forms.py' % project,
-                           '%s/models.py' % project])
-    subprocess.check_call(['sed', 
-                           's/\[APPNAME\]/%s/' % project, 
-                           '%s/manage.py' % data_files],
-                           stdout=manage_file)
-    manage_file.close()
+                           '%s/models.py' % project,
+                           '%s/views.py' % project])
+
+    files = [(manage_file, '%s/manage.py' % data_files),
+             (init_file, '%s/__init__.py' % data_files)]
+    create_files(files, project)
 
     return
+
+def create_files(files, project):
+    for f, name in files:
+        subprocess.check_call(['sed',
+                               's/\[APPNAME\]/%s/' % project, 
+                               '%s' % name],
+                               stdout=f)
+        f.close()
+                               
